@@ -172,7 +172,7 @@ public class DraggableItem : MonoBehaviour
 
         if (consumed)
         {
-            int scoreChange = assignedCorrectly ? scoreValue : -3 * scoreValue;
+            int scoreChange = assignedCorrectly ? scoreValue : -2 * scoreValue;
             GameManager.Instance.AddScore(scoreChange);
             Debug.Log($"{gameObject.name} was consumed by {other.name} for {scoreChange}.");
             Destroy(gameObject);
