@@ -27,7 +27,6 @@ public class DraggableItem : MonoBehaviour
     [SerializeField]
     private InputActionReference clickAction;
 
-    private float moveSpeed;
     private float rotateSpeed;
     private bool isBeingDragged = false;
     private Vector3 dragVelocity = Vector3.zero;    // Used by SmoothDamp during drag
