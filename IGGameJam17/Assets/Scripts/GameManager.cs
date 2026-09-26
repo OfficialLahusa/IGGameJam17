@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
     public bool RoundCompleted { get; private set; } = false;
     public static GameManager Instance { get; private set; }
 
+    [SerializeField]
+    private GameObject spawnLocation;
+    [SerializeField]
+    private GameObject itemPrefab;
+
     private void Awake()
     {
 
@@ -39,6 +44,11 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int score)
     {
+        Score += score;
+    }
 
+    public void SpawnItem()
+    {
+        Instantiate(itemPrefab, spawnLocation.transform.position, Quaternion.identity);
     }
 }

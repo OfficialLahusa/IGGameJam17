@@ -23,6 +23,11 @@ public class DraggableItem : MonoBehaviour
 
     [Header("Type")]
     [SerializeField] private bool isFood;
+    [SerializeField] private int scoreValue = 10;
+
+    [Header("Input")]
+    [SerializeField]
+    private InputActionReference clickAction;
 
     private float moveSpeed;
     private float rotateSpeed;
@@ -31,9 +36,7 @@ public class DraggableItem : MonoBehaviour
     private Vector3 momentum = Vector3.zero;        // Carries over after release
     private Camera mainCamera;
 
-    [Header("Input")]
-    [SerializeField]
-    private InputActionReference clickAction;
+    
 
     public bool IsFood => isFood;
 
@@ -117,6 +120,39 @@ public class DraggableItem : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        CheckAndDestroy(collision.collider);
+    }
+
+    private void CheckAndDestroy(Collider2D other)
+    {
+        bool consumed = false;
+        bool assignedCorrectly = false;
+
+        // Hit Trash
+        if (other.CompareTag("TrashCan"))
+        {
+            consumed = true;
+            assignedCorrectly = !isFood;
+        }
+        // Hit Monster
+        else if (other.CompareTag("Monster"))
+        {
+            consumed = true;
+            assignedCorrectly = isFood;
+        }
+
+        if (consumed)
+        {
+            int scoreChange = assignedCorrectly ? scoreValue : -scoreValue;
+            GameManager.Instance.AddScore(scoreChange);
+            Debug.Log($"{gameObject.name} was consumed by {other.name} for {scoreChange}.");
+            GameManager.Instance.SpawnItem();
+            Destroy(gameObject);
+        }
+    }
+
     private Vector3 GetMouseWorldPos()
     {
         Vector2 screenPos = Mouse.current.position.ReadValue();
@@ -171,10 +207,6 @@ public class DraggableItem : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Vector3 viewportPos = mainCamera.WorldToViewportPoint(transform.position);
-        if (viewportPos.x > 1.1f)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
