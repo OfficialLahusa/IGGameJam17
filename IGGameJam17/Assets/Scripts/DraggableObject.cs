@@ -4,24 +4,24 @@ using UnityEngine.InputSystem;
 public class DraggableItem : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float minMoveSpeed = 1f;
-    [SerializeField] private float maxMoveSpeed = 3f;
+    public float minSpawnSpeed = 3f;
+    public float maxSpawnSpeed = 6f;
 
     [Header("Rotation Settings")]
-    [SerializeField] private float minRotateSpeed = 20f;
-    [SerializeField] private float maxRotateSpeed = 90f;
+    public float minRotateSpeed = 20f;
+    public float maxRotateSpeed = 90f;
 
     [Header("Drag Settings")]
-    [SerializeField] private float dragSmoothTime = 0.15f;
+    public float dragSmoothTime = 0.1f;
 
     [Header("Momentum Settings")]
-    [SerializeField] private float momentumDecay = 2f;       // Higher = momentum fades faster
-    [SerializeField] private float momentumInfluence = 1f;   // Multiplier on the release velocity
-    [SerializeField] private float maxMomentum = 20f;        // Cap so crazy flicks don't break it
+    public float momentumDecay = 0f;       // Higher = momentum fades faster
+    public float momentumInfluence = 1f;   // Multiplier on the release velocity
+    public float maxMomentum = 20f;        // Cap so crazy flicks don't break it
 
     [Header("Type")]
-    [SerializeField] private bool isFood;
-    [SerializeField] private int scoreValue = 10;
+    public bool isFood;
+    public int scoreValue = 15;
 
     [Header("Input")]
     [SerializeField]
@@ -63,7 +63,6 @@ public class DraggableItem : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        moveSpeed = Random.Range(minMoveSpeed, maxMoveSpeed);
         rotateSpeed = Random.Range(minRotateSpeed, maxRotateSpeed);
 
         if (Random.value > 0.5f)
@@ -107,7 +106,7 @@ public class DraggableItem : MonoBehaviour
     private void HandleFreeMovement()
     {
         // Base rightward drift + leftover momentum
-        Vector3 totalVelocity = (Vector3.right * moveSpeed) + momentum;
+        Vector3 totalVelocity = momentum;
         transform.position += totalVelocity * Time.deltaTime;
 
         // Decay momentum toward zero
@@ -173,7 +172,7 @@ public class DraggableItem : MonoBehaviour
 
         if (consumed)
         {
-            int scoreChange = assignedCorrectly ? scoreValue : -scoreValue;
+            int scoreChange = assignedCorrectly ? scoreValue : -3 * scoreValue;
             GameManager.Instance.AddScore(scoreChange);
             Debug.Log($"{gameObject.name} was consumed by {other.name} for {scoreChange}.");
             Destroy(gameObject);
@@ -223,6 +222,18 @@ public class DraggableItem : MonoBehaviour
             // Clamp momentum so extreme mouse flicks don't send it flying off screen instantly
             if (momentum.magnitude > maxMomentum)
                 momentum = momentum.normalized * maxMomentum;
+
+            // Randomize momentum if it's too small to avoid items getting stuck in place
+            if (true || momentum.magnitude < 0.35f)
+            {
+                // Get direction from unit sphere sample
+                Vector2 addedMomentum = Random.insideUnitCircle.normalized * Random.Range(0, 0.6f);
+                momentum += new Vector3(
+                    addedMomentum.x,
+                    addedMomentum.y,
+                    0f
+                );
+            }
 
             dragVelocity = Vector3.zero;
 

@@ -7,7 +7,8 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private GameObject rightTop;
     [SerializeField] private GameObject rightBottom;
 
-    [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private GameObject[] foodPrefabs;
+    [SerializeField] private GameObject[] garbagePrefabs;
 
     void Start()
     {
@@ -25,10 +26,12 @@ public class ItemSpawner : MonoBehaviour
 
     public void SpawnItem()
     {
-        float speed = Random.Range(3, 6);
+        GameObject chosenPrefab = Random.value < 0.5f ? foodPrefabs[Random.Range(0, foodPrefabs.Length)] : garbagePrefabs[Random.Range(0, garbagePrefabs.Length)];
+
+        float speed = Random.Range(chosenPrefab.GetComponent<DraggableItem>().minSpawnSpeed, chosenPrefab.GetComponent<DraggableItem>().maxSpawnSpeed);
 
         (Vector3 spawnPos, Vector3 normDir) = GetRandomSpawnKinetics();
-        GameObject item = Instantiate(itemPrefab, spawnPos, Quaternion.identity);
+        GameObject item = Instantiate(chosenPrefab, spawnPos, Quaternion.identity);
         item.GetComponent<DraggableItem>().SetMomentum(normDir * speed); // Adjust speed as needed
     }
 
