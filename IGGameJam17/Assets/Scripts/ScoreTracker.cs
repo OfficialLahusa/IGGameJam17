@@ -14,6 +14,6 @@ public class ScoreTracker : MonoBehaviour
 
     void Update()
     {
-        text.text = GameManager.Instance.Score.ToString();
+        text.text = prefix + GameManager.Instance.Score.ToString();
     }
 }
