@@ -33,7 +33,8 @@ public class DraggableItem : MonoBehaviour
     private Vector3 dragVelocity = Vector3.zero;    // Used by SmoothDamp during drag
     private Vector3 momentum = Vector3.zero;        // Carries over after release
     private Camera mainCamera;
-    private float timeToLive = 10f; // Time in seconds before the item is destroyed
+    private static readonly float MAX_TIME_TO_LIVE = 10f; // Maximum time in seconds before the item is destroyed without interaction
+    private float timeToLive = MAX_TIME_TO_LIVE; // Is refreshed upon interaction
 
 
 
@@ -170,7 +171,7 @@ public class DraggableItem : MonoBehaviour
             int scoreChange = assignedCorrectly ? scoreValue : -scoreValue;
             GameManager.Instance.AddScore(scoreChange);
             Debug.Log($"{gameObject.name} was consumed by {other.name} for {scoreChange}.");
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -204,6 +205,7 @@ public class DraggableItem : MonoBehaviour
         momentum = Vector3.zero;   // Kill leftover momentum while held
         dragVelocity = Vector3.zero;
 
+        RefreshTTL();
     }
 
     private void HandleReleased(InputAction.CallbackContext ctx)
@@ -218,13 +220,20 @@ public class DraggableItem : MonoBehaviour
                 momentum = momentum.normalized * maxMomentum;
 
             dragVelocity = Vector3.zero;
-        }
 
-        isBeingDragged = false;
+            isBeingDragged = false;
+
+            RefreshTTL();
+        }
     }
 
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    private void RefreshTTL()
+    {
+        timeToLive = MAX_TIME_TO_LIVE;
     }
 }
