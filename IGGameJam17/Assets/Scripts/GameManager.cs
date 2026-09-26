@@ -73,4 +73,9 @@ public class GameManager : MonoBehaviour
         ClearItems();
         SpawnItem();
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
