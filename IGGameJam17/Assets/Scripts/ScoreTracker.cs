@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScoreTracker : MonoBehaviour
 {
     [SerializeField]
-    private string prefix = "";
+    private bool signPrefix = false;
     private TMP_Text text;
 
     void Awake()
@@ -14,6 +14,13 @@ public class ScoreTracker : MonoBehaviour
 
     void Update()
     {
-        text.text = prefix + GameManager.Instance.Score.ToString();
+        if (signPrefix)
+        {
+            text.text = (GameManager.Instance.Score > 0 ? "+" : "-") + GameManager.Instance.Score.ToString();
+        }
+        else
+        {
+            text.text = GameManager.Instance.Score.ToString();
+        }
     }
 }
