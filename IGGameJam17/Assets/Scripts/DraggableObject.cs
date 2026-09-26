@@ -33,8 +33,9 @@ public class DraggableItem : MonoBehaviour
     private Vector3 dragVelocity = Vector3.zero;    // Used by SmoothDamp during drag
     private Vector3 momentum = Vector3.zero;        // Carries over after release
     private Camera mainCamera;
+    private float timeToLive = 10f; // Time in seconds before the item is destroyed
 
-    
+
 
     public bool IsFood => isFood;
 
@@ -70,6 +71,21 @@ public class DraggableItem : MonoBehaviour
 
     private void Update()
     {
+        timeToLive -= Time.deltaTime;
+
+        if (GameManager.Instance.RoundCompleted)
+        {
+            isBeingDragged = false; // Prevent dragging after round ends
+        }
+        else
+        {
+            if (timeToLive <= 0f)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+
         if (isBeingDragged)
         {
             HandleDrag();
@@ -118,6 +134,14 @@ public class DraggableItem : MonoBehaviour
         }
     }
 
+    public void SetMomentum(Vector3 newMomentum)
+    {
+        momentum = newMomentum;
+        // Clamp momentum so extreme mouse flicks don't send it flying off screen instantly
+        if (momentum.magnitude > maxMomentum)
+            momentum = momentum.normalized * maxMomentum;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CheckAndDestroy(collision.collider);
@@ -146,8 +170,7 @@ public class DraggableItem : MonoBehaviour
             int scoreChange = assignedCorrectly ? scoreValue : -scoreValue;
             GameManager.Instance.AddScore(scoreChange);
             Debug.Log($"{gameObject.name} was consumed by {other.name} for {scoreChange}.");
-            GameManager.Instance.SpawnItem();
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 
@@ -175,9 +198,6 @@ public class DraggableItem : MonoBehaviour
 
     private void HandlePressed(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Down");
-
-
         if (!IsPointerOverThisCollider()) return;
 
         isBeingDragged = true;
@@ -188,19 +208,19 @@ public class DraggableItem : MonoBehaviour
 
     private void HandleReleased(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Down");
+        if (isBeingDragged)
+        {
+            // Hand off the drag velocity as momentum for the free-movement phase
+            momentum = dragVelocity * momentumInfluence;
 
+            // Clamp momentum so extreme mouse flicks don't send it flying off screen instantly
+            if (momentum.magnitude > maxMomentum)
+                momentum = momentum.normalized * maxMomentum;
+
+            dragVelocity = Vector3.zero;
+        }
 
         isBeingDragged = false;
-
-        // Hand off the drag velocity as momentum for the free-movement phase
-        momentum = dragVelocity * momentumInfluence;
-
-        // Clamp momentum so extreme mouse flicks don't send it flying off screen instantly
-        if (momentum.magnitude > maxMomentum)
-            momentum = momentum.normalized * maxMomentum;
-
-        dragVelocity = Vector3.zero;
     }
 
     private void OnBecameInvisible()

@@ -88,7 +88,7 @@ MonoBehaviour:
   minRotateSpeed: 20
   maxRotateSpeed: 90
   dragSmoothTime: 0.1
-  momentumDecay: 0.5
+  momentumDecay: 0.1
   momentumInfluence: 1
   maxMomentum: 20
   isFood: 1

@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject roundCompletionOverlay;
+
     [SerializeField]
-    private GameObject spawnLocation;
-    [SerializeField]
-    private GameObject itemPrefab;
+    private ItemSpawner itemSpawner;
+
 
     private void Awake()
     {
@@ -48,12 +48,15 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int score)
     {
+        // Only add score while round is still running, otherwise ignore
+        if (RoundCompleted) return;
+
         Score += score;
     }
 
     public void SpawnItem()
     {
-        Instantiate(itemPrefab, spawnLocation.transform.position, Quaternion.identity);
+        itemSpawner.SpawnItem();
     }
 
     public void ClearItems()
