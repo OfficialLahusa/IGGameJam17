@@ -15,13 +15,9 @@ public class ItemSpawner : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Random.value < 0.01f) // Adjust spawn chance as needed
-        {
-            SpawnItem();
-        }
+        
     }
 
     public void SpawnItem()
