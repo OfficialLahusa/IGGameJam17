@@ -45,7 +45,7 @@ public class DraggableItem : MonoBehaviour
         if (clickAction != null && clickAction.action != null)
         {
             clickAction.action.Enable();
-            clickAction.action.started += HandlePressed;
+            //clickAction.action.started += HandlePressed;
             clickAction.action.canceled += HandleReleased;
         }
     }
@@ -54,7 +54,7 @@ public class DraggableItem : MonoBehaviour
     {
         if (clickAction != null && clickAction.action != null)
         {
-            clickAction.action.started -= HandlePressed;
+            //clickAction.action.started -= HandlePressed;
             clickAction.action.canceled -= HandleReleased;
         }
     }
@@ -72,7 +72,10 @@ public class DraggableItem : MonoBehaviour
 
     private void Update()
     {
-        timeToLive -= Time.deltaTime;
+        if (clickAction.action.IsPressed())
+        {
+            HandlePressed(new InputAction.CallbackContext());
+        }
 
         if (GameManager.Instance.RoundCompleted)
         {
@@ -93,6 +96,8 @@ public class DraggableItem : MonoBehaviour
         }
         else
         {
+            // Only subtract TTL when not dragged, so that it doesn't despawn while held.
+            timeToLive -= Time.deltaTime;
             HandleFreeMovement();
         }
 
