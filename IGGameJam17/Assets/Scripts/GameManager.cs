@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,12 @@ public class GameManager : MonoBehaviour
 
         if (!RoundCompleted)
         {
+            // TODO: Proper Frame Rate Independent Spawning Logic
+            if (Random.value < 0.01f) 
+            {
+                SpawnItem();
+            }
+
             SecondsRemaining -= Time.deltaTime;
 
             if (SecondsRemaining <= 0f)
@@ -79,6 +86,6 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        SceneManager.LoadScene("TitleScene");
     }
 }
