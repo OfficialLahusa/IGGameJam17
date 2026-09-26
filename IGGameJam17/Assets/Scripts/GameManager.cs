@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float SecondsRemaining { get; private set; } = 120f;
+    public float SecondsRemaining { get; private set; } = 45f;
     public int Score { get; private set; }
     public bool RoundCompleted { get; private set; } = false;
     public static GameManager Instance { get; private set; }
 
+    [SerializeField]
+    private GameObject roundCompletionOverlay;
     [SerializeField]
     private GameObject spawnLocation;
     [SerializeField]
@@ -28,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        roundCompletionOverlay.SetActive(RoundCompleted);
+
         if (!RoundCompleted)
         {
             SecondsRemaining -= Time.deltaTime;
@@ -50,5 +54,23 @@ public class GameManager : MonoBehaviour
     public void SpawnItem()
     {
         Instantiate(itemPrefab, spawnLocation.transform.position, Quaternion.identity);
+    }
+
+    public void ClearItems()
+    {
+        foreach (var item in GameObject.FindGameObjectsWithTag("Item"))
+        {
+            Destroy(item);
+        }
+    }
+
+    public void Restart()
+    {
+        Score = 0;
+        SecondsRemaining = 45f;
+        RoundCompleted = false;
+
+        ClearItems();
+        SpawnItem();
     }
 }
