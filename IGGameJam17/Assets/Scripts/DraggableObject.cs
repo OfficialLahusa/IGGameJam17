@@ -197,7 +197,10 @@ public class DraggableItem : MonoBehaviour
                 GameManager.Instance.AddCorrectSort();
 
                 if (isFood)
+                {
+                    FindFirstObjectByType<MonsterHeadController>().HappyPulse();
                     AudioManager.Instance.PlayFoodCollect();
+                }
                 else
                     AudioManager.Instance.PlayTrashCollect();
             }
@@ -205,6 +208,8 @@ public class DraggableItem : MonoBehaviour
             {
                 GameManager.Instance.AddWrongSort();
                 AudioManager.Instance.PlayWrongSort();
+
+                FindFirstObjectByType<MonsterHeadController>().AngryPulse();
             }
         }
     }
