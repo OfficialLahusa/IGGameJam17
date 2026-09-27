@@ -183,8 +183,8 @@ public class UpgradeButton : MonoBehaviour
         return upgradeKey switch
         {
             "0_0_variant" or "1_0_variant" or "2_0_variant" => 250,
-            "0_1_time" or "1_1_stack" or "2_1_variant" => 500,
-            "0_2_variant" or "1_2_time" or "2_2_stack" => 750,
+            "0_1_time" or "1_1_stack" or "2_1_variant" => 400,
+            "0_2_variant" or "1_2_time" or "2_2_stack" => 650,
             "0_3_stack" or "1_3_variant" or "2_3_time" => 1250,
             "0_4_time" or "1_4_stack" or "2_4_variant" => 1750,
             "0_5_variant" or "1_5_variant" or "2_5_stack" => 3000,
