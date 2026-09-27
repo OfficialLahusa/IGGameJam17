@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 105488246}
   - component: {fileID: 105488245}
   m_Layer: 0
-  m_Name: Back Button
+  m_Name: Forward Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,7 +253,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3152505575422854070, guid: 625e8dbdcfe23e74e9a634302ff43d2f, type: 3}
+  m_Sprite: {fileID: 62314154, guid: 625e8dbdcfe23e74e9a634302ff43d2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1027,7 +1027,7 @@ GameObject:
   - component: {fileID: 2054408925}
   - component: {fileID: 2054408924}
   m_Layer: 0
-  m_Name: Forward Button
+  m_Name: Back Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1082,7 +1082,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6933514698303425394, guid: 625e8dbdcfe23e74e9a634302ff43d2f, type: 3}
+  m_Sprite: {fileID: 195744998, guid: 625e8dbdcfe23e74e9a634302ff43d2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1332,7 +1332,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 500
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3885392239026744653, guid: 625e8dbdcfe23e74e9a634302ff43d2f, type: 3}
+  m_Sprite: {fileID: -775949311, guid: 625e8dbdcfe23e74e9a634302ff43d2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

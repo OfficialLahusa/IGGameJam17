@@ -32,8 +32,8 @@ public class DraggableItem : MonoBehaviour
     private Vector3 dragVelocity = Vector3.zero;    // Used by SmoothDamp during drag
     private Vector3 momentum = Vector3.zero;        // Carries over after release
     private Camera mainCamera;
-    private static readonly float MAX_TIME_TO_LIVE = 10f; // Maximum time in seconds before the item is destroyed without interaction
-    private float timeToLive = MAX_TIME_TO_LIVE; // Is refreshed upon interaction
+    private static readonly float BASE_TIME_TO_LIVE = 10f; // Maximum time in seconds before the item is destroyed without interaction
+    private float timeToLive = BASE_TIME_TO_LIVE; // Is refreshed upon interaction
 
 
 
@@ -66,6 +66,8 @@ public class DraggableItem : MonoBehaviour
 
         if (Random.value > 0.5f)
             rotateSpeed = -rotateSpeed;
+
+        RefreshTTL();
     }
 
     private void Update()
@@ -249,6 +251,6 @@ public class DraggableItem : MonoBehaviour
 
     private void RefreshTTL()
     {
-        timeToLive = MAX_TIME_TO_LIVE;
+        timeToLive = BASE_TIME_TO_LIVE * (3 / minSpawnSpeed);
     }
 }
