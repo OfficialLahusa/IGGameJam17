@@ -158,7 +158,7 @@ public class UpgradeButton : MonoBehaviour
             "0_0_variant" => "It's sticky and smelly, but sort of edible nonetheless...",
             "0_1_time" or "0_4_time" or "1_2_time" or "2_3_time" => "Increases the round duration by 10 seconds. Since item spawns increase the longer a round lasts, this enables you to score higher than ever before.",
             "0_2_variant" => "A sweet fruit that keeps scores high and doctors frightened.",
-            "0_3_stack" or "1_1_stack" or "1_4_stack" or "2_2_stack" or "2_5_stack" => "Increases the maximum number of items you can hold at the same time by one. Drag a held item into another to stack them.",
+            "0_3_stack" or "1_1_stack" or "1_4_stack" or "2_2_stack" or "2_5_stack" => "Increases the maximum number of items you can hold at the same time by one. Drag a held item into another to stack them. Be careful not to mix treats and trash in the same pile.",
             "0_5_variant" => "A delightful jelly that slowly wobbles along.",
             "1_3_variant" => "Well-seasoned rice is always nice.",
             "1_5_variant" => "A massive amount of juicy chicken. Crispy on the outside and stuffed with all the kitched could offer.",

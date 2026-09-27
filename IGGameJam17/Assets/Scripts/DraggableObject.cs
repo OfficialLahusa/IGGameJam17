@@ -227,8 +227,14 @@ public class DraggableItem : MonoBehaviour
 
     private void HandlePressed(InputAction.CallbackContext ctx)
     {
-        if (!IsPointerOverThisCollider()) return;
+        if (!IsPointerOverThisCollider() || isBeingDragged) return;
 
+        // Don't pick up item if stack is full
+        if (GameManager.Instance.IsStackFull())
+            return;
+
+        // Otherwise, add item to stack
+        GameManager.Instance.AddStackItem();
         isBeingDragged = true;
         momentum = Vector3.zero;   // Kill leftover momentum while held
         dragVelocity = Vector3.zero;
@@ -265,6 +271,8 @@ public class DraggableItem : MonoBehaviour
 
             RefreshTTL();
         }
+
+        GameManager.Instance.ClearStackCount();
     }
 
     private void OnBecameInvisible()

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static readonly float INITIAL_ROUND_TIME = 45f;
     public int HandStackSize { get; private set; } = 1;
+    public int CurrentStackedItems { get; private set; } = 0;
     public float CurrentRoundTimeLimit { get; private set; } = INITIAL_ROUND_TIME;
     public float SecondsRemaining { get; private set; } = INITIAL_ROUND_TIME;
     public int CurrentRoundScore { get; private set; }
@@ -139,6 +140,7 @@ public class GameManager : MonoBehaviour
         AddInitialUpgrades();
 
         ClearItems();
+        ClearStackCount();
     }
 
     public void BeginNextRound()
@@ -152,6 +154,7 @@ public class GameManager : MonoBehaviour
         RoundMissedSorts = 0;
 
         ClearItems();
+        ClearStackCount();
     }
 
     private void AddInitialUpgrades()
@@ -267,5 +270,22 @@ public class GameManager : MonoBehaviour
     public void AddMissedSort()
     {
         RoundMissedSorts++;
+    }
+
+    public void ClearStackCount()
+    {
+        CurrentStackedItems = 0;
+    }
+
+    public void AddStackItem()
+    {
+        if (IsStackFull())
+            Debug.LogError("Cannot add item to stack since it is already full.");
+        CurrentStackedItems++;
+    }
+
+    public bool IsStackFull()
+    {
+        return CurrentStackedItems >= HandStackSize;
     }
 }
