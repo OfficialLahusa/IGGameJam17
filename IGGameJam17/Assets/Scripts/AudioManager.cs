@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
@@ -18,6 +19,38 @@ public class AudioManager : MonoBehaviour
     [Header("SFX Variation")]
     [SerializeField] private bool varyPitch = true;
     [SerializeField] private float pitchJitter = 0.05f;
+
+    [Header("Individual Clips")]
+    [SerializeField] private AudioClip buttonClick;
+    [SerializeField] private AudioClip foodCollect;
+    [SerializeField] private AudioClip trashCollect;
+    [SerializeField] private AudioClip wrongSort;
+    [SerializeField] private AudioClip[] pickup;
+
+    public void PlayButtonClick()
+    {
+        PlaySound(buttonClick);
+    }
+
+    public void PlayFoodCollect()
+    {
+        PlaySound(foodCollect);
+    }
+
+    public void PlayTrashCollect()
+    {
+        PlaySound(trashCollect);
+    }
+
+    public void PlayWrongSort()
+    {
+        PlaySound(wrongSort);
+    }
+
+    public void PlayPickup()
+    {
+        PlayRandom(pickup);
+    }
 
     private void Awake()
     {

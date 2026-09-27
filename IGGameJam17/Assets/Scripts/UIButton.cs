@@ -37,7 +37,11 @@ public class UIButton : MonoBehaviour
     private void HandleReleased(InputAction.CallbackContext ctx)
     {
         if (IsPointerOverThisCollider())
+        {
+            AudioManager.Instance.PlayButtonClick();
             clickEffect?.Invoke();
+        }
+            
     }
 
     private Vector3 GetMouseWorldPos()

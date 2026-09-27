@@ -195,10 +195,16 @@ public class DraggableItem : MonoBehaviour
             if (assignedCorrectly)
             {
                 GameManager.Instance.AddCorrectSort();
+
+                if (isFood)
+                    AudioManager.Instance.PlayFoodCollect();
+                else
+                    AudioManager.Instance.PlayTrashCollect();
             }
             else
             {
                 GameManager.Instance.AddWrongSort();
+                AudioManager.Instance.PlayWrongSort();
             }
         }
     }
@@ -238,6 +244,8 @@ public class DraggableItem : MonoBehaviour
         isBeingDragged = true;
         momentum = Vector3.zero;   // Kill leftover momentum while held
         dragVelocity = Vector3.zero;
+
+        AudioManager.Instance.PlayPickup();
 
         RefreshTTL();
     }
