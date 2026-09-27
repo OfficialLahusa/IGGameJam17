@@ -7,6 +7,7 @@ TagManager:
   - Monster
   - TrashCan
   - Item
+  - Void
   layers:
   - Default
   - TransparentFX

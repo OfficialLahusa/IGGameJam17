@@ -32,7 +32,7 @@ public class DraggableItem : MonoBehaviour
     private Vector3 dragVelocity = Vector3.zero;    // Used by SmoothDamp during drag
     private Vector3 momentum = Vector3.zero;        // Carries over after release
     private Camera mainCamera;
-    private static readonly float BASE_TIME_TO_LIVE = 10f; // Maximum time in seconds before the item is destroyed without interaction
+    private static readonly float BASE_TIME_TO_LIVE = 20f; // Maximum time in seconds before the item is destroyed without interaction
     private float timeToLive = BASE_TIME_TO_LIVE; // Is refreshed upon interaction
 
 
@@ -83,8 +83,11 @@ public class DraggableItem : MonoBehaviour
         }
         else
         {
+            // Count object as missed if TTL expires without being dragged or sorted
             if (timeToLive <= 0f)
             {
+                GameManager.Instance.AddMissedSort();
+
                 Destroy(gameObject);
                 return;
             }
@@ -155,6 +158,16 @@ public class DraggableItem : MonoBehaviour
 
     private void CheckAndDestroy(Collider2D other)
     {
+        // Count object as missed if it touches the map border
+        if (other.CompareTag("Void"))
+        {
+            GameManager.Instance.AddMissedSort();
+
+            Destroy(gameObject);
+            return;
+        }
+
+        // Otherwise, check if it was consumed by a target (Trash or Monster) and update score accordingly
         bool consumed = false;
         bool assignedCorrectly = false;
 
@@ -177,6 +190,15 @@ public class DraggableItem : MonoBehaviour
             GameManager.Instance.AddScore(scoreChange);
             //Debug.Log($"{gameObject.name} was consumed by {other.name} for {scoreChange}.");
             Destroy(gameObject);
+
+            if (assignedCorrectly)
+            {
+                GameManager.Instance.AddCorrectSort();
+            }
+            else
+            {
+                GameManager.Instance.AddWrongSort();
+            }
         }
     }
 

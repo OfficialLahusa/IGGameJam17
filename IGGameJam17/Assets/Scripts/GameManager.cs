@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public int CurrentRoundScore { get; private set; }
     public int TotalScore { get; private set; }
     public bool RoundCompleted { get; private set; } = false;
+    public int RoundCorrectSorts { get; private set; } = 0;
+    public int RoundWrongSorts { get; private set; } = 0;
+    public int RoundMissedSorts { get; private set; } = 0;
     public static GameManager Instance { get; private set; }
 
     [SerializeField]
@@ -104,7 +107,13 @@ public class GameManager : MonoBehaviour
         TotalScore = 0;
         SecondsRemaining = INITIAL_ROUND_TIME;
         CurrentRoundTimeLimit = INITIAL_ROUND_TIME;
+        
         RoundCompleted = false;
+
+        RoundCorrectSorts = 0;
+        RoundWrongSorts = 0;
+        RoundMissedSorts = 0;
+
         UnlockedUpgrades.Clear();
         AddInitialUpgrades();
 
@@ -116,6 +125,10 @@ public class GameManager : MonoBehaviour
         CurrentRoundScore = 0;
         SecondsRemaining = CurrentRoundTimeLimit;
         RoundCompleted = false;
+
+        RoundCorrectSorts = 0;
+        RoundWrongSorts = 0;
+        RoundMissedSorts = 0;
 
         ClearItems();
     }
@@ -168,5 +181,20 @@ public class GameManager : MonoBehaviour
     public void QuitToTitle()
     {
         SceneManager.LoadScene("TitleScene");
+    }
+
+    public void AddCorrectSort()
+    {
+        RoundCorrectSorts++;
+    }
+
+    public void AddWrongSort()
+    {
+        RoundWrongSorts++;
+    }
+
+    public void AddMissedSort()
+    {
+        RoundMissedSorts++;
     }
 }
