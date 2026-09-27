@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static readonly float INITIAL_ROUND_TIME = 45f;
+    public static readonly float INITIAL_ROUND_TIME = 60f;
     public int HandStackSize { get; private set; } = 2;
     public int CurrentStackedItems { get; private set; } = 0;
     public float CurrentRoundTimeLimit { get; private set; } = INITIAL_ROUND_TIME;

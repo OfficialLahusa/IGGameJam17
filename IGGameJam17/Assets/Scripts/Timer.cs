@@ -4,6 +4,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     private TMP_Text text;
+    [SerializeField] private GameObject urgentOverlay;
 
     void Awake()
     {
@@ -13,6 +14,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         text.text = FormatSeconds((int)Mathf.Floor(GameManager.Instance.SecondsRemaining));
+        urgentOverlay.SetActive(GameManager.Instance.SecondsRemaining < 10f);
     }
 
     public static string FormatSeconds(int totalSeconds)
