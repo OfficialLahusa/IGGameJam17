@@ -163,17 +163,17 @@ public class UpgradeButton : MonoBehaviour
     {
         return upgradeKey switch
         {
-            "0_0_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
-            "1_0_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
-            "2_0_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "0_0_variant" => "New treat\n<color=#00aa00>+8</color> satisfaction",
+            "1_0_variant" => "New treat\n<color=#00aa00>+36</color> satisfaction",
+            "2_0_variant" => "New treat\n<color=#00aa00>+10</color> satisfaction",
             "0_1_time" or "0_4_time" or "1_2_time" or "2_3_time" => "Increases the round duration by <color=#00aa00>+10 seconds</color>",
-            "0_2_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "0_2_variant" => "New treat\n<color=#00aa00>+25</color> satisfaction",
             "0_3_stack" or "1_1_stack" or "1_4_stack" or "2_2_stack" or "2_5_stack" => "You can carry <color=#00aa00>+1 item</color> at once",
-            "0_5_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
-            "1_3_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
-            "1_5_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
-            "2_1_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
-            "2_4_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "0_5_variant" => "New treat\n<color=#00aa00>+50</color> satisfaction",
+            "1_3_variant" => "New treat\n<color=#00aa00>+30</color> satisfaction",
+            "1_5_variant" => "New treat\n<color=#00aa00>+50</color> satisfaction",
+            "2_1_variant" => "New treat\n<color=#00aa00>+20</color> satisfaction",
+            "2_4_variant" => "New treat\n<color=#00aa00>+40</color> satisfaction",
             _ => "Unknown Upgrade"
         };
     }
