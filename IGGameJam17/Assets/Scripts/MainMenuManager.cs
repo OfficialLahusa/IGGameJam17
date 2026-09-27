@@ -8,7 +8,6 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -17,6 +16,11 @@ public class MainMenuManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
+        AudioManager.Instance.PlayTitleMusic();
     }
 
     public void Play()

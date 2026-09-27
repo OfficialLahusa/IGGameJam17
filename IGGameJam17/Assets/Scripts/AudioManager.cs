@@ -22,14 +22,22 @@ public class AudioManager : MonoBehaviour
 
     [Header("Individual Clips")]
     [SerializeField] private AudioClip buttonClick;
+    [SerializeField] private AudioClip buttonFail;
     [SerializeField] private AudioClip foodCollect;
     [SerializeField] private AudioClip trashCollect;
     [SerializeField] private AudioClip wrongSort;
     [SerializeField] private AudioClip[] pickup;
+    [SerializeField] private AudioClip titleMusic;
+    [SerializeField] private AudioClip mainMusic;
 
     public void PlayButtonClick()
     {
         PlaySound(buttonClick);
+    }
+
+    public void PlayButtonFail()
+    {
+        PlaySound(buttonFail, 0.5f);
     }
 
     public void PlayFoodCollect()
@@ -39,7 +47,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayTrashCollect()
     {
-        PlaySound(trashCollect);
+        PlaySound(trashCollect, 0.5f);
     }
 
     public void PlayWrongSort()
@@ -50,6 +58,21 @@ public class AudioManager : MonoBehaviour
     public void PlayPickup()
     {
         PlayRandom(pickup);
+    }
+
+    public void PlayTitleMusic()
+    {
+        PlayMusic(titleMusic);
+    }
+
+    public void PlayMainMusic()
+    {
+        PlayMusic(mainMusic, 1f);
+    }
+
+    public void PlayShopMusic()
+    {
+        PlayMusic(mainMusic, 0.6f);
     }
 
     private void Awake()
@@ -172,10 +195,12 @@ public class AudioManager : MonoBehaviour
     private void PlayMusicInternal(AudioClip clip, float volume)
     {
         if (clip == null || musicSource == null) return;
+
+        musicSource.volume = masterVolume * musicVolume * volume;
+
         if (musicSource.clip == clip && musicSource.isPlaying) return;
 
         musicSource.clip = clip;
-        musicSource.volume = masterVolume * musicVolume * volume;
         musicSource.Play();
     }
 

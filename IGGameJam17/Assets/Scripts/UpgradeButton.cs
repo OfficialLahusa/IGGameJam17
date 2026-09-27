@@ -79,6 +79,12 @@ public class UpgradeButton : MonoBehaviour
 
             // Update all sprites, including self
             shopManager.UpdateShop();
+
+            AudioManager.Instance.PlayButtonClick();
+        }
+        else
+        {
+            AudioManager.Instance.PlayButtonFail();
         }
     }
 
