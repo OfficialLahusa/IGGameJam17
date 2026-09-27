@@ -12,6 +12,6 @@ public class TotalScoreDisplay : MonoBehaviour
 
     void Update()
     {
-        text.text = $"Total Score: {GameManager.Instance.TotalScore}";
+        text.text = $"Total: {GameManager.Instance.TotalScore}";
     }
 }

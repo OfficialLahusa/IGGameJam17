@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFoodCollect()
     {
-        PlaySound(foodCollect);
+        PlaySound(foodCollect, 1.35f);
     }
 
     public void PlayTrashCollect()

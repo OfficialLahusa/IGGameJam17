@@ -25,12 +25,12 @@ public class MonsterHeadController : MonoBehaviour
     public void HappyPulse()
     {
         if (angryTimer <= 0f)
-            happyTimer += 2f;
+            happyTimer += 0.9f;
     }
 
     public void AngryPulse()
     {
-        angryTimer += 2f;
+        angryTimer += 0.9f;
         happyTimer = 0f;
     }
 }
