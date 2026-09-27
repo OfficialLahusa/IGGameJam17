@@ -525,7 +525,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Total Score: ###'
+  m_text: '###'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: de84f9cade3999b45936359247aad139, type: 2}
   m_sharedMaterial: {fileID: -5399484836938360648, guid: de84f9cade3999b45936359247aad139, type: 2}
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -665,7 +665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.27, y: 3}
+  m_AnchoredPosition: {x: -4.26, y: 2.848}
   m_SizeDelta: {x: 3.3287, y: 0.7494}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &169079385
@@ -1096,7 +1096,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unlock an Item
+  m_text: 'TIMER
+
+
+    Increase time by'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: de84f9cade3999b45936359247aad139, type: 2}
   m_sharedMaterial: {fileID: -5399484836938360648, guid: de84f9cade3999b45936359247aad139, type: 2}
@@ -1105,8 +1108,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1123,13 +1126,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.6
-  m_fontSizeBase: 2.6
+  m_fontSize: 4.97
+  m_fontSizeBase: 4.97
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1236,8 +1239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.8287, y: 3.7246}
-  m_SizeDelta: {x: 7.7343, y: 2.5243}
+  m_AnchoredPosition: {x: 2.85, y: 3.65}
+  m_SizeDelta: {x: 7.3947, y: 2.4285}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &804252324
 PrefabInstance:
