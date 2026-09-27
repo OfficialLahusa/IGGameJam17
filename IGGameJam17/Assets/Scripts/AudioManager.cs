@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip trashCollect;
     [SerializeField] private AudioClip wrongSort;
     [SerializeField] private AudioClip[] pickup;
+    [SerializeField] private AudioClip titleMusic;
+    [SerializeField] private AudioClip mainMusic;
 
     public void PlayButtonClick()
     {
@@ -50,6 +52,16 @@ public class AudioManager : MonoBehaviour
     public void PlayPickup()
     {
         PlayRandom(pickup);
+    }
+
+    public void PlayTitleMusic()
+    {
+        PlayMusic(titleMusic);
+    }
+
+    public void PlayMainMusic()
+    {
+        PlayMusic(mainMusic);
     }
 
     private void Awake()

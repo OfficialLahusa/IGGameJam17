@@ -4672,6 +4672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cigarette
       objectReference: {fileID: 0}
+    - target: {fileID: 4420849693941006021, guid: d85c6be8eb21e9e48acd606d0fd6063a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

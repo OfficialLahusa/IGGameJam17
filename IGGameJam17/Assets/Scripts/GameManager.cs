@@ -46,6 +46,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().name == "TitleScene")
+        {
+            AudioManager.Instance.PlayTitleMusic();
+        }
+        else
+        {
+            AudioManager.Instance.PlayMainMusic();
+        }
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
