@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static readonly float INITIAL_ROUND_TIME = 45f;
-    public int HandStackSize { get; private set; } = 1;
+    public int HandStackSize { get; private set; } = 2;
     public int CurrentStackedItems { get; private set; } = 0;
     public float CurrentRoundTimeLimit { get; private set; } = INITIAL_ROUND_TIME;
     public float SecondsRemaining { get; private set; } = INITIAL_ROUND_TIME;
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        HandStackSize = 1;
+        HandStackSize = 2;
         CurrentRoundScore = 0;
         TotalScore = 0;
         SecondsRemaining = INITIAL_ROUND_TIME;
@@ -134,6 +134,9 @@ public class GameManager : MonoBehaviour
 
         AddInitialUpgrades();
 
+        if (itemSpawner != null)
+            itemSpawner.Reset();
+
         ClearItems();
         ClearStackCount();
     }
@@ -147,6 +150,9 @@ public class GameManager : MonoBehaviour
         RoundCorrectSorts = 0;
         RoundWrongSorts = 0;
         RoundMissedSorts = 0;
+
+        if (itemSpawner != null)
+            itemSpawner.Reset(true); // Reset + Shuffle
 
         ClearItems();
         ClearStackCount();
