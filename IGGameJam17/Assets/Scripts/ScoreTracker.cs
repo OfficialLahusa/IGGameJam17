@@ -16,11 +16,11 @@ public class ScoreTracker : MonoBehaviour
     {
         if (signPrefix)
         {
-            text.text = (GameManager.Instance.Score > 0 ? "+" : "-") + GameManager.Instance.Score.ToString();
+            text.text = (GameManager.Instance.CurrentRoundScore > 0 ? "+" : "-") + GameManager.Instance.CurrentRoundScore.ToString();
         }
         else
         {
-            text.text = GameManager.Instance.Score.ToString();
+            text.text = GameManager.Instance.CurrentRoundScore.ToString();
         }
     }
 }

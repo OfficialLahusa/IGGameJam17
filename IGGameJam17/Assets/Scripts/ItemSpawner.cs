@@ -39,7 +39,7 @@ public class ItemSpawner : MonoBehaviour
         Vector3 targetPos = GetRandomPoint(!onLeftHalf);
         Vector3 normDir = (targetPos - spawnPos).normalized;
 
-        Debug.Log("Spawn Position: " + spawnPos + ", Target Position: " + targetPos + ", Normalized Direction: " + normDir);
+        //Debug.Log("Spawn Position: " + spawnPos + ", Target Position: " + targetPos + ", Normalized Direction: " + normDir);
 
         return (spawnPos, normDir);
     }
