@@ -7,16 +7,13 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private GameObject rightTop;
     [SerializeField] private GameObject rightBottom;
 
-    private float[] delayQueue = new float[]
-    {
-        1f, 0.85f, 0.2f, 0.65f, 1f, 0.9f, 0.42f, 0.3f, 0.77f, 1f
-    };
+    private float[] delayQueue;
     private int currentDelayIdx = 0;
     private float remainingDelay;
 
     void Awake()
     {
-        remainingDelay = delayQueue[0];
+        Reset();
     }
 
     void Update()
@@ -92,5 +89,19 @@ public class ItemSpawner : MonoBehaviour
         float t = Mathf.Max(0f, elapsedSeconds);
         float ramp = 1f - Mathf.Exp(-t / Tau);
         return (1f + (Ceiling - 1f) * ramp * ramp + LinearTail * t) / 5f;
+    }
+
+    public void Reset(bool shuffle = false)
+    {
+        delayQueue = new float[]
+        {
+            1f, 0.85f, 0.2f, 0.65f, 1f, 0.9f, 0.42f, 0.3f, 0.77f, 1f
+        };
+
+        if (shuffle)
+            delayQueue.Shuffle();
+
+        currentDelayIdx = 0;
+        remainingDelay = delayQueue[0];
     }
 }

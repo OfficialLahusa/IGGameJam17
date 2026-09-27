@@ -134,6 +134,9 @@ public class GameManager : MonoBehaviour
 
         AddInitialUpgrades();
 
+        if (itemSpawner != null)
+            itemSpawner.Reset();
+
         ClearItems();
         ClearStackCount();
     }
@@ -147,6 +150,9 @@ public class GameManager : MonoBehaviour
         RoundCorrectSorts = 0;
         RoundWrongSorts = 0;
         RoundMissedSorts = 0;
+
+        if (itemSpawner != null)
+            itemSpawner.Reset(true); // Reset + Shuffle
 
         ClearItems();
         ClearStackCount();
