@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayButtonFail()
     {
-        PlaySound(buttonFail);
+        PlaySound(buttonFail, 0.5f);
     }
 
     public void PlayFoodCollect()
@@ -67,7 +67,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMainMusic()
     {
-        PlayMusic(mainMusic);
+        PlayMusic(mainMusic, 1f);
+    }
+
+    public void PlayShopMusic()
+    {
+        PlayMusic(mainMusic, 0.6f);
     }
 
     private void Awake()
@@ -190,10 +195,12 @@ public class AudioManager : MonoBehaviour
     private void PlayMusicInternal(AudioClip clip, float volume)
     {
         if (clip == null || musicSource == null) return;
+
+        musicSource.volume = masterVolume * musicVolume * volume;
+
         if (musicSource.clip == clip && musicSource.isPlaying) return;
 
         musicSource.clip = clip;
-        musicSource.volume = masterVolume * musicVolume * volume;
         musicSource.Play();
     }
 

@@ -16,7 +16,10 @@ public class MainMenuManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
 
+    private void Start()
+    {
         AudioManager.Instance.PlayTitleMusic();
     }
 

@@ -50,9 +50,13 @@ public class GameManager : MonoBehaviour
         {
             AudioManager.Instance.PlayTitleMusic();
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "MaínScene")
         {
             AudioManager.Instance.PlayMainMusic();
+        }
+        else
+        {
+            AudioManager.Instance.PlayShopMusic();
         }
 
         if (Instance != null && Instance != this)
