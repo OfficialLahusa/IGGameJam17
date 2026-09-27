@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayTrashCollect()
     {
-        PlaySound(trashCollect);
+        PlaySound(trashCollect, 0.5f);
     }
 
     public void PlayWrongSort()
