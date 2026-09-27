@@ -199,10 +199,15 @@ public class DraggableItem : MonoBehaviour
                 if (isFood)
                 {
                     FindFirstObjectByType<MonsterHeadController>().HappyPulse();
+                    FindFirstObjectByType<ScorePopupManager>().DisplayFoodValue(scoreChange);
                     AudioManager.Instance.PlayFoodCollect();
                 }
                 else
+                {
+                    FindFirstObjectByType<ScorePopupManager>().DisplayTrashValue(scoreChange);
                     AudioManager.Instance.PlayTrashCollect();
+
+                }
             }
             else
             {
@@ -210,6 +215,15 @@ public class DraggableItem : MonoBehaviour
                 AudioManager.Instance.PlayWrongSort();
 
                 FindFirstObjectByType<MonsterHeadController>().AngryPulse();
+
+                if (isFood)
+                {
+                    FindFirstObjectByType<ScorePopupManager>().DisplayFoodValue(scoreChange);
+                }
+                else
+                {
+                    FindFirstObjectByType<ScorePopupManager>().DisplayTrashValue(scoreChange);
+                }
             }
         }
     }
