@@ -17,6 +17,6 @@ public class SortStatDisplay : MonoBehaviour
         float wrongPercent = total > 0 ? (float)GameManager.Instance.RoundWrongSorts / total * 100f : 0f;
         float missedPercent = total > 0 ? (float)GameManager.Instance.RoundMissedSorts / total * 100f : 0f;
 
-        text.text = $"<color=green>{correctPercent:F1}% correct</color>\r\n<color=red>{wrongPercent:F1}% wrong</color>\r\n<color=orange>{missedPercent:F1}% missed</color>";
+        text.text = $"<color=#00aa00>{correctPercent:F1}% correct</color>\r\n<color=#bb0000>{wrongPercent:F1}% wrong</color>\r\n<color=orange>{missedPercent:F1}% missed</color>";
     }
 }

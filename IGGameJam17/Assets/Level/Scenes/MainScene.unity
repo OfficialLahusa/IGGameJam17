@@ -2337,9 +2337,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<color=green>XX% correct</color>
+  m_text: '<color=#00aa00>XX% correct</color>
 
-    <color=red>XX% wrong</color>
+    <color=#bb0000>XX% wrong</color>
 
     <color=orange>XX%
     missed'
