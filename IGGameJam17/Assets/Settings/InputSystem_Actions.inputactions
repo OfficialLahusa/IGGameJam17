@@ -518,7 +518,7 @@
                 {
                     "name": "",
                     "id": "fc5d5146-d4fb-4aa1-9e15-42671f592f90",
-                    "path": "<Touchscreen>/touch*/press",
+                    "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch",
