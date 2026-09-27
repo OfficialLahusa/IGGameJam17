@@ -92,7 +92,7 @@ MonoBehaviour:
   momentumInfluence: 1
   maxMomentum: 20
   isFood: 0
-  scoreValue: 20
+  scoreValue: 15
   clickAction: {fileID: -121826940774430208, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!50 &7491725116404722064
 Rigidbody2D:
