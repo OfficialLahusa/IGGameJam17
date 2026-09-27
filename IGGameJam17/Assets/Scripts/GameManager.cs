@@ -2,14 +2,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.UIElements.ToolbarMenu;
 
 public class GameManager : MonoBehaviour
 {
     public static readonly float INITIAL_ROUND_TIME = 45f;
+    public int HandStackSize { get; private set; } = 1;
     public float CurrentRoundTimeLimit { get; private set; } = INITIAL_ROUND_TIME;
     public float SecondsRemaining { get; private set; } = INITIAL_ROUND_TIME;
     public int CurrentRoundScore { get; private set; }
-    public int TotalScore { get; private set; }
+    public int TotalScore { get; private set; } = 50000;
     public bool RoundCompleted { get; private set; } = false;
     public int RoundCorrectSorts { get; private set; } = 0;
     public int RoundWrongSorts { get; private set; } = 0;
@@ -21,6 +23,21 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private ItemSpawner itemSpawner;
+
+    public List<GameObject> ActiveFoodPrefabs { get; private set; } = new List<GameObject>();
+    public List<GameObject> ActiveGarbagePrefabs { get; private set; } = new List<GameObject>();
+
+    [SerializeField] private GameObject apple;
+    [SerializeField] private GameObject cakeSlice;
+    [SerializeField] private GameObject cheese;
+    [SerializeField] private GameObject chicken;
+    [SerializeField] private GameObject cigarette;
+    [SerializeField] private GameObject hotdog;
+    [SerializeField] private GameObject jello;
+    [SerializeField] private GameObject roulade;
+    [SerializeField] private GameObject onigiri;
+    [SerializeField] private GameObject shroom;
+    [SerializeField] private GameObject takoyaki;
 
     public HashSet<string> UnlockedUpgrades { get; private set; } = new HashSet<string>();
 
@@ -103,6 +120,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        HandStackSize = 1;
         CurrentRoundScore = 0;
         TotalScore = 0;
         SecondsRemaining = INITIAL_ROUND_TIME;
@@ -115,6 +133,9 @@ public class GameManager : MonoBehaviour
         RoundMissedSorts = 0;
 
         UnlockedUpgrades.Clear();
+        ActiveFoodPrefabs.Clear();
+        ActiveGarbagePrefabs.Clear();
+
         AddInitialUpgrades();
 
         ClearItems();
@@ -135,7 +156,12 @@ public class GameManager : MonoBehaviour
 
     private void AddInitialUpgrades()
     {
-        UnlockedUpgrades.AddRange(new List<string> { "0_0_variant", "1_0_variant", "2_0_variant" });
+        foreach (string key in new List<string> { "0_0_variant", "1_0_variant", "2_0_variant" })
+        {
+            UnlockUpgrade(key);
+        }
+
+        ActiveGarbagePrefabs.Add(cigarette);
     }
 
     public bool CanAfford(int cost)
@@ -159,6 +185,31 @@ public class GameManager : MonoBehaviour
         Debug.Log("Applied upgrade: " + upgradeKey);
 
         // TODO: Apply upgrade effects here, such as increasing round time limit or other effects
+        switch (upgradeKey)
+        {
+            case "0_0_variant":
+                ActiveFoodPrefabs.Add(cheese);
+                break;
+            case "0_2_variant":
+                ActiveFoodPrefabs.Add(apple);
+                break;
+            case "0_5_variant":
+                ActiveFoodPrefabs.Add(jello);
+                break;
+            case "1_0_variant":
+                ActiveFoodPrefabs.Add(shroom);
+                break;
+            case "2_0_variant":
+                ActiveFoodPrefabs.Add(takoyaki);
+                break;
+            case "0_3_time":
+                HandStackSize += 1;
+                break;
+            case "0_1_time":
+            case "0_4_time":
+                CurrentRoundTimeLimit += 10f;
+                break;
+        }
     }
 
     public bool HasUpgrade(string upgradeKey)

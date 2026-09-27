@@ -7,9 +7,6 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private GameObject rightTop;
     [SerializeField] private GameObject rightBottom;
 
-    [SerializeField] private GameObject[] foodPrefabs;
-    [SerializeField] private GameObject[] garbagePrefabs;
-
     void Start()
     {
         
@@ -22,7 +19,12 @@ public class ItemSpawner : MonoBehaviour
 
     public void SpawnItem()
     {
-        GameObject chosenPrefab = Random.value < 0.5f ? foodPrefabs[Random.Range(0, foodPrefabs.Length)] : garbagePrefabs[Random.Range(0, garbagePrefabs.Length)];
+        // Create food or trash
+        GameObject chosenPrefab = Random.value < 0.5f
+            // Pick food prefab
+            ? GameManager.Instance.ActiveFoodPrefabs[Random.Range(0, GameManager.Instance.ActiveFoodPrefabs.Count)]
+            // Pick trash prefab
+            : GameManager.Instance.ActiveGarbagePrefabs[Random.Range(0, GameManager.Instance.ActiveGarbagePrefabs.Count)];
 
         float speed = Random.Range(chosenPrefab.GetComponent<DraggableItem>().minSpawnSpeed, chosenPrefab.GetComponent<DraggableItem>().maxSpawnSpeed);
 

@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public System.Action OnShopUpdate;
+
+    void Awake()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void UpdateShop()
+    {
+        OnShopUpdate?.Invoke();
     }
 }

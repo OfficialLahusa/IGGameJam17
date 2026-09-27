@@ -8,15 +8,13 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private GameObject mainIconLocked;
     [SerializeField] private GameObject lockedSubIcon;
     [SerializeField] private GameObject unlockableSubIcon;
-    [SerializeField] private int upgradeCost = 500;
     [SerializeField] private string upgradeKey = "row_col_type";
     [SerializeField] private string dependencyKey = string.Empty;
-    [SerializeField] private string tooltipHeader = "Upgrade Name";
-    [SerializeField] private string tooltipDescription = "Upgrade Description";
 
     [SerializeField] private InputActionReference clickAction;
 
     private Camera mainCamera;
+    private ShopManager shopManager;
 
     void Start()
     {
@@ -43,6 +41,9 @@ public class UpgradeButton : MonoBehaviour
             clickAction.action.Enable();
             clickAction.action.started += HandlePressed;
         }
+
+        shopManager = FindFirstObjectByType<ShopManager>();
+        shopManager.OnShopUpdate += UpdateSprite;
     }
 
     private void OnDisable()
@@ -51,6 +52,8 @@ public class UpgradeButton : MonoBehaviour
         {
             clickAction.action.started -= HandlePressed;
         }
+
+        shopManager.OnShopUpdate -= UpdateSprite;
     }
 
     private void UpdateSprite()
@@ -74,7 +77,8 @@ public class UpgradeButton : MonoBehaviour
             // Update tooltip since text is different post buy
             SetTooltip();
 
-            UpdateSprite();
+            // Update all sprites, including self
+            shopManager.UpdateShop();
         }
     }
 
@@ -87,7 +91,7 @@ public class UpgradeButton : MonoBehaviour
     {
         return !GameManager.Instance.HasUpgrade(upgradeKey) 
             && dependencyKey == string.Empty || GameManager.Instance.HasUpgrade(dependencyKey) 
-            && GameManager.Instance.CanAfford(upgradeCost);
+            && GameManager.Instance.CanAfford(GetUpgradeCost(upgradeKey));
     }
 
     private bool Unlock()
@@ -99,13 +103,13 @@ public class UpgradeButton : MonoBehaviour
         }
 
         GameManager.Instance.UnlockUpgrade(upgradeKey);
-        GameManager.Instance.PayPrice(upgradeCost);
+        GameManager.Instance.PayPrice(GetUpgradeCost(upgradeKey));
         return true;
     }
 
     private void SetTooltip()
     {
-        tooltipText.SetTooltip(tooltipHeader, tooltipDescription, upgradeCost);
+        tooltipText.SetTooltip(GetTooltipHeader(upgradeKey), GetTooltipDescription(upgradeKey), GetUpgradeCost(upgradeKey));
     }
 
     private Vector3 GetMouseWorldPos()
@@ -128,5 +132,45 @@ public class UpgradeButton : MonoBehaviour
         // We use Collider2D.OverlapPoint on our own collider to check only ourselves.
         Collider2D collider = GetComponent<Collider2D>();
         return collider.OverlapPoint(worldPos2D);
+    }
+
+    private static string GetTooltipHeader(string upgradeKey)
+    {
+        return upgradeKey switch
+        {
+            "0_0_variant" => "Treat: Cheese",
+            "0_1_time" or "0_4_time" => "Longer Rounds",
+            "0_2_variant" => "Treat: Apple",
+            "0_3_stack" => "Larger Hand",
+            "0_5_variant" => "Treat: Wobbly Jelly",
+            _ => "Unknown Upgrade"
+        };
+    }
+
+    private static string GetTooltipDescription(string upgradeKey)
+    {
+        return upgradeKey switch
+        {
+            "0_0_variant" => "It's sticky and smelly, but sort of edible nonetheless...",
+            "0_1_time" or "0_4_time" => "More time to score even higher, since item spawns become more frequent the longer a round lasts.",
+            "0_2_variant" => "A sweet fruit that keeps scores high and doctors frightened.",
+            "0_3_stack" => "Increases the maximum number of items that can be held at once.",
+            "0_5_variant" => "A delightful jelly that slowly wobbles along.",
+            _ => "Unknown Upgrade"
+        };
+    }
+
+    private static int GetUpgradeCost(string upgradeKey)
+    {
+        return upgradeKey switch
+        {
+            "0_0_variant" => 500,
+            "0_1_time" => 1000,
+            "0_2_variant" => 1500,
+            "0_3_stack" => 2000,
+            "0_4_time" => 2500,
+            "0_5_variant" => 3000,
+            _ => 9999
+        };
     }
 }

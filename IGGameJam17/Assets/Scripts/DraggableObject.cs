@@ -153,7 +153,8 @@ public class DraggableItem : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CheckAndDestroy(collision.collider);
+        if (!GameManager.Instance.RoundCompleted)
+            CheckAndDestroy(collision.collider);
     }
 
     private void CheckAndDestroy(Collider2D other)
