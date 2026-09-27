@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public float CurrentRoundTimeLimit { get; private set; } = INITIAL_ROUND_TIME;
     public float SecondsRemaining { get; private set; } = INITIAL_ROUND_TIME;
     public int CurrentRoundScore { get; private set; }
-    public int TotalScore { get; private set; } = 50000;
+    public int TotalScore { get; private set; } = 0;
     public bool RoundCompleted { get; private set; } = false;
     public int RoundCorrectSorts { get; private set; } = 0;
     public int RoundWrongSorts { get; private set; } = 0;
@@ -29,11 +29,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject apple;
     [SerializeField] private GameObject cakeSlice;
+    [SerializeField] private GameObject can;
     [SerializeField] private GameObject cheese;
     [SerializeField] private GameObject chicken;
     [SerializeField] private GameObject cigarette;
     [SerializeField] private GameObject hotdog;
     [SerializeField] private GameObject jello;
+    [SerializeField] private GameObject paper;
     [SerializeField] private GameObject roulade;
     [SerializeField] private GameObject onigiri;
     [SerializeField] private GameObject shroom;
@@ -161,7 +163,9 @@ public class GameManager : MonoBehaviour
             UnlockUpgrade(key);
         }
 
+        ActiveGarbagePrefabs.Add(can);
         ActiveGarbagePrefabs.Add(cigarette);
+        ActiveGarbagePrefabs.Add(paper);
     }
 
     public bool CanAfford(int cost)
