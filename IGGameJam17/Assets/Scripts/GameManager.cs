@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject shroom;
     [SerializeField] private GameObject takoyaki;
 
-    public HashSet<string> UnlockedUpgrades { get; private set; } = new HashSet<string>();
+    private HashSet<string> unlockedUpgrades = new HashSet<string>();
+    public float RoundElapsedSeconds => CurrentRoundTimeLimit - SecondsRemaining;
 
 
     private void Awake()
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             RoundCompleted = SceneManager.GetActiveScene().name != "MainScene";
-            if (UnlockedUpgrades.Count == 0)
+            if (unlockedUpgrades.Count == 0)
             {
                 AddInitialUpgrades();
             }
@@ -77,12 +78,6 @@ public class GameManager : MonoBehaviour
 
         if (!RoundCompleted)
         {
-            // TODO: Proper Frame Rate Independent Spawning Logic
-            if (Random.value < 0.01f && itemSpawner != null) 
-            {
-                SpawnItem();
-            }
-
             SecondsRemaining -= Time.deltaTime;
 
             if (SecondsRemaining <= 0f)
@@ -133,7 +128,7 @@ public class GameManager : MonoBehaviour
         RoundWrongSorts = 0;
         RoundMissedSorts = 0;
 
-        UnlockedUpgrades.Clear();
+        unlockedUpgrades.Clear();
         ActiveFoodPrefabs.Clear();
         ActiveGarbagePrefabs.Clear();
 
@@ -185,7 +180,7 @@ public class GameManager : MonoBehaviour
 
     public void UnlockUpgrade(string upgradeKey)
     {
-        UnlockedUpgrades.Add(upgradeKey);
+        unlockedUpgrades.Add(upgradeKey);
 
         Debug.Log("Applied upgrade: " + upgradeKey);
 
@@ -237,7 +232,7 @@ public class GameManager : MonoBehaviour
 
     public bool HasUpgrade(string upgradeKey)
     {
-        return UnlockedUpgrades.Contains(upgradeKey);
+        return unlockedUpgrades.Contains(upgradeKey);
     }
 
     public void EnterShop()
