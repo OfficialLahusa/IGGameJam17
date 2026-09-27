@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.UIElements.ToolbarMenu;
 
 public class GameManager : MonoBehaviour
 {
@@ -206,11 +204,29 @@ public class GameManager : MonoBehaviour
             case "2_0_variant":
                 ActiveFoodPrefabs.Add(takoyaki);
                 break;
-            case "0_3_time":
+            case "1_3_variant":
+                ActiveFoodPrefabs.Add(onigiri);
+                break;
+            case "1_5_variant":
+                ActiveFoodPrefabs.Add(chicken);
+                break;
+            case "2_1_variant":
+                ActiveFoodPrefabs.Add(cakeSlice);
+                break;
+            case "2_4_variant":
+                ActiveFoodPrefabs.Add(hotdog);
+                break;
+            case "0_3_stack":
+            case "1_1_stack":
+            case "1_4_stack":
+            case "2_2_stack":
+            case "2_5_stack":
                 HandStackSize += 1;
                 break;
             case "0_1_time":
             case "0_4_time":
+            case "1_2_time":
+            case "2_3_time":
                 CurrentRoundTimeLimit += 10f;
                 break;
         }

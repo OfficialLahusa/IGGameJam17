@@ -139,10 +139,14 @@ public class UpgradeButton : MonoBehaviour
         return upgradeKey switch
         {
             "0_0_variant" => "Treat: Cheese",
-            "0_1_time" or "0_4_time" => "Longer Rounds",
+            "0_1_time" or "0_4_time" or "1_2_time" or "2_3_time" => "Longer Rounds",
             "0_2_variant" => "Treat: Apple",
-            "0_3_stack" => "Larger Hand",
+            "0_3_stack" or "1_1_stack" or "1_4_stack" or "2_2_stack" or "2_5_stack" => "Larger Hand",
             "0_5_variant" => "Treat: Wobbly Jelly",
+            "1_3_variant" => "Treat: Onigiri",
+            "1_5_variant" => "Treat: Stuffed Chicken",
+            "2_1_variant" => "Treat: Piece of Cake",
+            "2_4_variant" => "Treat: Hot Dog",
             _ => "Unknown Upgrade"
         };
     }
@@ -152,10 +156,14 @@ public class UpgradeButton : MonoBehaviour
         return upgradeKey switch
         {
             "0_0_variant" => "It's sticky and smelly, but sort of edible nonetheless...",
-            "0_1_time" or "0_4_time" => "More time to score even higher, since item spawns become more frequent the longer a round lasts.",
+            "0_1_time" or "0_4_time" or "1_2_time" or "2_3_time" => "Increases the round duration by 10 seconds. Since item spawns increase the longer a round lasts, this enables you to score higher than ever before.",
             "0_2_variant" => "A sweet fruit that keeps scores high and doctors frightened.",
-            "0_3_stack" => "Increases the maximum number of items that can be held at once.",
+            "0_3_stack" or "1_1_stack" or "1_4_stack" or "2_2_stack" or "2_5_stack" => "Increases the maximum number of items you can hold at the same time by one. Drag a held item into another to stack them.",
             "0_5_variant" => "A delightful jelly that slowly wobbles along.",
+            "1_3_variant" => "Well-seasoned rice is always nice.",
+            "1_5_variant" => "A massive amount of juicy chicken. Crispy on the outside and stuffed with all the kitched could offer.",
+            "2_1_variant" => "Store-bought but brilliant.",
+            "2_4_variant" => "The to-go snack so good you'll forget what it's made of.",
             _ => "Unknown Upgrade"
         };
     }
@@ -164,12 +172,12 @@ public class UpgradeButton : MonoBehaviour
     {
         return upgradeKey switch
         {
-            "0_0_variant" => 500,
-            "0_1_time" => 1000,
-            "0_2_variant" => 1500,
-            "0_3_stack" => 2000,
-            "0_4_time" => 2500,
-            "0_5_variant" => 3000,
+            "0_0_variant" or "1_0_variant" or "2_0_variant" => 500,
+            "0_1_time" or "1_1_stack" or "2_1_variant" => 1000,
+            "0_2_variant" or "1_2_time" or "2_2_stack" => 1500,
+            "0_3_stack" or "1_3_variant" or "2_3_time" => 2000,
+            "0_4_time" or "1_4_stack" or "2_4_variant" => 2500,
+            "0_5_variant" or "1_5_variant" or "2_5_stack" => 3000,
             _ => 9999
         };
     }
