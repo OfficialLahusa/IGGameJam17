@@ -115,7 +115,7 @@ public class UpgradeButton : MonoBehaviour
 
     private void SetTooltip()
     {
-        tooltipText.SetTooltip(GetTooltipHeader(upgradeKey), GetTooltipDescription(upgradeKey), GetUpgradeCost(upgradeKey));
+        tooltipText.SetTooltip(GetTooltipHeader(upgradeKey), GetTooltipDescription(upgradeKey), GetUpgradeCost(upgradeKey), IsUnlocked());
     }
 
     private Vector3 GetMouseWorldPos()
@@ -144,15 +144,17 @@ public class UpgradeButton : MonoBehaviour
     {
         return upgradeKey switch
         {
-            "0_0_variant" => "Treat: Cheese",
-            "0_1_time" or "0_4_time" or "1_2_time" or "2_3_time" => "Longer Rounds",
-            "0_2_variant" => "Treat: Apple",
+            "0_0_variant" => "Cheese",
+            "1_0_variant" => "Shroom",
+            "2_0_variant" => "Takoyaki",
+            "0_1_time" or "0_4_time" or "1_2_time" or "2_3_time" => "Overtime",
+            "0_2_variant" => "Apple",
             "0_3_stack" or "1_1_stack" or "1_4_stack" or "2_2_stack" or "2_5_stack" => "Larger Hand",
-            "0_5_variant" => "Treat: Wobbly Jelly",
-            "1_3_variant" => "Treat: Onigiri",
-            "1_5_variant" => "Treat: Stuffed Chicken",
-            "2_1_variant" => "Treat: Piece of Cake",
-            "2_4_variant" => "Treat: Hot Dog",
+            "0_5_variant" => "Wobbly Jelly",
+            "1_3_variant" => "Onigiri",
+            "1_5_variant" => "Chicken",
+            "2_1_variant" => "Cake",
+            "2_4_variant" => "Hot Dog",
             _ => "Unknown Upgrade"
         };
     }
@@ -161,15 +163,17 @@ public class UpgradeButton : MonoBehaviour
     {
         return upgradeKey switch
         {
-            "0_0_variant" => "It's sticky and smelly, but sort of edible nonetheless...",
-            "0_1_time" or "0_4_time" or "1_2_time" or "2_3_time" => "Increases the round duration by 10 seconds. Since item spawns increase the longer a round lasts, this enables you to score higher than ever before.",
-            "0_2_variant" => "A sweet fruit that keeps scores high and doctors frightened.",
-            "0_3_stack" or "1_1_stack" or "1_4_stack" or "2_2_stack" or "2_5_stack" => "Increases the maximum number of items you can hold at the same time by one. Drag a held item into another to stack them. Be careful not to mix treats and trash in the same pile.",
-            "0_5_variant" => "A delightful jelly that slowly wobbles along.",
-            "1_3_variant" => "Well-seasoned rice is always nice.",
-            "1_5_variant" => "A massive amount of juicy chicken. Crispy on the outside and stuffed with all the kitched could offer.",
-            "2_1_variant" => "Store-bought but brilliant.",
-            "2_4_variant" => "The to-go snack so good you'll forget what it's made of.",
+            "0_0_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "1_0_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "2_0_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "0_1_time" or "0_4_time" or "1_2_time" or "2_3_time" => "Increases the round duration by <color=#00aa00>+10 seconds</color>",
+            "0_2_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "0_3_stack" or "1_1_stack" or "1_4_stack" or "2_2_stack" or "2_5_stack" => "You can carry <color=#00aa00>+1 item</color> at once",
+            "0_5_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "1_3_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "1_5_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "2_1_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
+            "2_4_variant" => "New treat\n<color=#00aa00>+TODO</color> satisfaction",
             _ => "Unknown Upgrade"
         };
     }
@@ -178,11 +182,11 @@ public class UpgradeButton : MonoBehaviour
     {
         return upgradeKey switch
         {
-            "0_0_variant" or "1_0_variant" or "2_0_variant" => 500,
-            "0_1_time" or "1_1_stack" or "2_1_variant" => 1000,
-            "0_2_variant" or "1_2_time" or "2_2_stack" => 1500,
-            "0_3_stack" or "1_3_variant" or "2_3_time" => 2000,
-            "0_4_time" or "1_4_stack" or "2_4_variant" => 2500,
+            "0_0_variant" or "1_0_variant" or "2_0_variant" => 250,
+            "0_1_time" or "1_1_stack" or "2_1_variant" => 500,
+            "0_2_variant" or "1_2_time" or "2_2_stack" => 750,
+            "0_3_stack" or "1_3_variant" or "2_3_time" => 1250,
+            "0_4_time" or "1_4_stack" or "2_4_variant" => 1750,
             "0_5_variant" or "1_5_variant" or "2_5_stack" => 3000,
             _ => 9999
         };

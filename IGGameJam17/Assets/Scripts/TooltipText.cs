@@ -4,11 +4,16 @@ using UnityEngine;
 public class TooltipText : MonoBehaviour
 {
     private TMP_Text text;
+    [SerializeField] private TMP_Text costText;
     private float fadeTime = 0.2f; // Time in seconds for the tooltip to fade out
 
     void Awake()
     {
         text = GetComponent<TMP_Text>();
+    }
+
+    private void Start()
+    {
         SetDefaultTooltip();
     }
 
@@ -25,18 +30,21 @@ public class TooltipText : MonoBehaviour
 
     public void SetDefaultTooltip()
     {
-        SetTooltip("Upgrade Shop", "Spend your scored points in the upgrade shop to enhance your odds for the coming rounds.", -1);
+        SetTooltip("Shop", "Click to purchase upgrades for points.", -1, true);
     }
 
-    public void SetTooltip(string header, string content, int cost)
+    public void SetTooltip(string header, string content, int cost, bool isUnlocked)
     {
-        SetText(header, content, cost);
+        SetText(header, content, cost, isUnlocked);
         fadeTime = 0.2f; // Reset fade time whenever a new tooltip is set
     }
 
-    private void SetText(string header, string content, int cost)
+    private void SetText(string header, string content, int cost, bool isUnlocked)
     {
-        string costStr = cost >= 0 ? cost.ToString() : "???";
-        this.text.text = $"<size=200%><b>{header}</b></size>\n{content}\n<color=yellow>Cost: {costStr}</color>";
+        string costColor = (GameManager.Instance.CanAfford(cost) ? "<color=#00aa00>" : "<color=#bb0000>");
+        if (isUnlocked)
+            costColor = "";
+        text.text = $"<b><size=140%>{header}</size></b>\n{content}";
+        costText.text = cost >= 0 ? "Cost: " + costColor + cost.ToString() : string.Empty;
     }
 }

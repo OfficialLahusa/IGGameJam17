@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayButtonFail()
     {
-        PlaySound(buttonFail, 0.5f);
+        PlaySound(buttonFail, 0.35f);
     }
 
     public void PlayFoodCollect()
