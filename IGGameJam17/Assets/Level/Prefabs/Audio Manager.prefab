@@ -47,11 +47,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   sfxSource: {fileID: 0}
   musicSource: {fileID: 0}
-  masterVolume: 1
+  masterVolume: 0.7
   sfxVolume: 1
   musicVolume: 0.6
   varyPitch: 1
   pitchJitter: 0.05
+  buttonClick: {fileID: 8300000, guid: 1382f86b82da5d44182220273e6cac53, type: 3}
+  foodCollect: {fileID: 8300000, guid: 1f18e38409c3cc14fb387899f8c2e276, type: 3}
+  trashCollect: {fileID: 8300000, guid: 07f30b3ae6516e247862de2ddf201f7b, type: 3}
+  wrongSort: {fileID: 8300000, guid: 797ae13c509394746b87a61dc935f6b9, type: 3}
+  pickup:
+  - {fileID: 8300000, guid: 6b1c0787d60ef4b439d3ec577a0a9a35, type: 3}
+  - {fileID: 8300000, guid: 85e70494b44f63d4183ff79487141161, type: 3}
+  - {fileID: 8300000, guid: 0073b2d209a5e6b46a512ffef5803b83, type: 3}
+  - {fileID: 8300000, guid: e578e633f101ad04ab486895f926217b, type: 3}
+  - {fileID: 8300000, guid: ad0087b12ca98974fab2be5a4459cfc9, type: 3}
 --- !u!82 &3995283116593835114
 AudioSource:
   m_ObjectHideFlags: 0
