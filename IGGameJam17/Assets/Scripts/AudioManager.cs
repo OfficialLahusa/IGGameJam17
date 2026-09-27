@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Individual Clips")]
     [SerializeField] private AudioClip buttonClick;
+    [SerializeField] private AudioClip buttonFail;
     [SerializeField] private AudioClip foodCollect;
     [SerializeField] private AudioClip trashCollect;
     [SerializeField] private AudioClip wrongSort;
@@ -32,6 +33,11 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonClick()
     {
         PlaySound(buttonClick);
+    }
+
+    public void PlayButtonFail()
+    {
+        PlaySound(buttonFail);
     }
 
     public void PlayFoodCollect()

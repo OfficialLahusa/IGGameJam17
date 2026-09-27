@@ -53,6 +53,7 @@ MonoBehaviour:
   varyPitch: 1
   pitchJitter: 0.15
   buttonClick: {fileID: 8300000, guid: 1382f86b82da5d44182220273e6cac53, type: 3}
+  buttonFail: {fileID: 8300000, guid: 467e00ce6cf7f0e4a9942d9627c10a9f, type: 3}
   foodCollect: {fileID: 8300000, guid: 1f18e38409c3cc14fb387899f8c2e276, type: 3}
   trashCollect: {fileID: 8300000, guid: 07f30b3ae6516e247862de2ddf201f7b, type: 3}
   wrongSort: {fileID: 8300000, guid: 797ae13c509394746b87a61dc935f6b9, type: 3}
